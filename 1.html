@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 <head>  <title>hô hố</title></head>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
 <!-- Firebase -->
@@ -11,7 +16,7 @@
      
  
         <div ng-controller="chatCtrl">
-            <div id="chatBox" style="padding: 10px; border: black 1px solid">
+            <div id="chatBox" style=" border: black 1px solid">
                 <h1>Chỉ anh và em :3</h1>
                 <div ng-repeat="chatMessage in chatMessages | limitTo:-15">
                     <span style="font-weight: bold">{{chatMessage.name}}</span>   : <span>{{chatMessage.message}}</span>
@@ -32,7 +37,6 @@
             var previousChat = '';
             $scope.name = name;
             $scope.chatMessage = "";
-
             var ref = new Firebase("https://project-908092864886352076.firebaseio.com/");
             var sync = $firebase(ref);
             $scope.chatMessages = sync.$asArray();
