@@ -1,97 +1,55 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Tspkno1 by tspkno1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Tspkno1</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="https://github.com/tspkno1/tspkno1" class="btn">View on GitHub</a>
-      <a href="https://github.com/tspkno1/tspkno1/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/tspkno1/tspkno1/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>  <title>hô hố</title></head>
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+    <body ng-app="app">
+     
+ 
+        <div ng-controller="chatCtrl">
+            <div id="chatBox" style="padding: 10px; border: black 1px solid">
+                <h1>Chỉ anh và em :3</h1>
+                <div ng-repeat="chatMessage in chatMessages | limitTo:-15">
+                    <span style="font-weight: bold">{{chatMessage.name}}</span>   : <span>{{chatMessage.message}}</span>
+                </div>  
+            </div>
+               
+            <form>
+               <br/>
+              <input type="text" ng-model="chatMes"/> <button type="submit" ng-click="sendChat()" >Gửi</button>
+            </form>
+        </div>
+    </body>
 
-    <section class="main-content">
-      <p>&lt;!DOCTYPE html&gt;
+    <script>
+        var app = angular.module('app', ['firebase']);
+        app.controller('chatCtrl', ['$scope', '$firebase', function($scope, $firebase) {
+            var name = "Mòe";
+            var previousChat = '';
+            $scope.name = name;
+            $scope.chatMessage = "";
 
-</p>  hô hố
-
-
-
-
-
-
-
-
-
-
-
-
-
-<pre><code>&lt;body ng-app="app"&gt;
-
-
-    &lt;div ng-controller="chatCtrl"&gt;
-        &lt;div id="chatBox" style="padding: 10px; border: black 1px solid"&gt;
-            &lt;h1&gt;Chỉ anh và em :3&lt;/h1&gt;
-            &lt;div ng-repeat="chatMessage in chatMessages | limitTo:-15"&gt;
-                &lt;span style="font-weight: bold"&gt;{{chatMessage.name}}&lt;/span&gt;   : &lt;span&gt;{{chatMessage.message}}&lt;/span&gt;
-            &lt;/div&gt;  
-        &lt;/div&gt;
-
-        &lt;form&gt;
-           &lt;br/&gt;
-          &lt;input type="text" ng-model="chatMes"/&gt; &lt;button type="submit" ng-click="sendChat()" &gt;Gửi&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-
-&lt;script&gt;
-    var app = angular.module('app', ['firebase']);
-    app.controller('chatCtrl', ['$scope', '$firebase', function($scope, $firebase) {
-        var name = "Mòe";
-        var previousChat = '';
-        $scope.name = name;
-        $scope.chatMessage = "";
-
-        var ref = new Firebase("https://project-908092864886352076.firebaseio.com/");
-        var sync = $firebase(ref);
-        $scope.chatMessages = sync.$asArray();
-
-        $scope.sendChat = function () {
-            if($scope.chatMes == previousChat || $scope.chatMes.length == 0) return;
-            var chatMessage = { name: name, message: $scope.chatMes };
-            $scope.chatMessages.$add(chatMessage);
-            previousChat = $scope.chatMes;
-            $scope.chatMes = "";
-        }
-
-        $scope.clear = function() {
-            for (var i = 0; i &lt; $scope.chatMessages.length; i++) {
-                $scope.chatMessages.$remove($scope.chatMessages[i]);
+            var ref = new Firebase("https://project-908092864886352076.firebaseio.com/");
+            var sync = $firebase(ref);
+            $scope.chatMessages = sync.$asArray();
+			
+            $scope.sendChat = function () {
+            	if($scope.chatMes == previousChat || $scope.chatMes.length == 0) return;
+                var chatMessage = { name: name, message: $scope.chatMes };
+                $scope.chatMessages.$add(chatMessage);
+                previousChat = $scope.chatMes;
+                $scope.chatMes = "";
             }
-        }
-    }]);
-&lt;/script&gt;
-</code></pre>
-
-<p></p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/tspkno1/tspkno1">Tspkno1</a> is maintained by <a href="https://github.com/tspkno1">tspkno1</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
+          
+            $scope.clear = function() {
+                for (var i = 0; i < $scope.chatMessages.length; i++) {
+                    $scope.chatMessages.$remove($scope.chatMessages[i]);
+                }
+            }
+        }]);
+    </script>
 </html>
