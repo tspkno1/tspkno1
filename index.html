@@ -11,7 +11,7 @@
      
  
         <div ng-controller="chatCtrl">
-            <div id="chatBox" style="padding: 10px; border: black 1px solid">
+            <div id="chatBox" style=" border: black 1px solid">
                 <h1>Chỉ anh và em :3</h1>
                 <div ng-repeat="chatMessage in chatMessages | limitTo:-15">
                     <span style="font-weight: bold">{{chatMessage.name}}</span>   : <span>{{chatMessage.message}}</span>
